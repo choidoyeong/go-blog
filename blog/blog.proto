@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option go_package = "github.com/choidoyeong/blog/blog";
+
+package blog;
+
+service Blog {
+    rpc GetPost(PostId) returns (Post) {}
+
+    rpc CreatePost(Post) returns (Post) {}
+    
+    rpc ModifyPost(Post) returns (Post) {}
+
+    rpc ListPosts(EmptyRequest) returns (stream Post) {}
+
+    rpc CreateComment(Comment) returns (Comment) {}
+
+    rpc ListComments(PostId) returns (stream Comment) {}
+}
+
+message EmptyRequest {}
+
+message PostId {
+    string post_id = 1;
+}
+
+message Post {
+    string post_id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message Comment {
+    string comment_id = 1;
+    string post_id = 2;
+    string content = 3;
+}
